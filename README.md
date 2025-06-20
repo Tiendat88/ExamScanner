@@ -1,64 +1,74 @@
-Dự án Chấm Thi Trắc Nghiệm Tự Động
-Tổng quan
-Dự án này triển khai một ứng dụng để tự động chấm bài thi trắc nghiệm từ hình ảnh phiếu trả lời. Ứng dụng sử dụng xử lý ảnh với OpenCV để nhận diện các ô được tô, xác định mã đề thi, số báo danh và tính điểm dựa trên đáp án đúng. Kết quả được hiển thị trên giao diện đồ họa (GUI) và lưu vào file CSV.
+Multiple Choice Answer Sheet Grading System
+Overview
+This Python application automates the grading of multiple-choice answer sheets by processing scanned images. It uses OpenCV for image processing, Tkinter for the GUI, and other libraries to detect marked answers, extract test and student IDs, calculate scores, and save results to a CSV file. The system supports multiple answer keys for different test versions and displays the graded answer sheet with marked answers.
+Features
 
-Tính năng
-Nhận diện ô tô: Phát hiện các ô được tô trên phiếu trả lời bằng kỹ thuật xử lý ảnh.
-Xác định mã đề và số báo danh: Đọc mã đề thi (6 chữ số) và số báo danh (3 chữ số) từ các ô được tô.
-Chấm điểm: So sánh câu trả lời với đáp án đúng (4 bộ đáp án được định nghĩa sẵn) và tính điểm trên thang 10.
-Hiển thị kết quả: Hiển thị điểm, mã đề, số báo danh trên GUI và hình ảnh phiếu trả lời với các ô được đánh dấu.
-Lưu kết quả: Lưu điểm, mã đề, số báo danh vào file exam_results.csv.
-Giao diện người dùng: Sử dụng Tkinter để chọn hình ảnh và hiển thị kết quả.
-Bộ dữ liệu
-Đầu vào: Hình ảnh phiếu trả lời trắc nghiệm (định dạng .jpg hoặc .png).
-Cấu trúc phiếu trả lời:
-120 câu hỏi trắc nghiệm, chia thành 4 cột (mỗi cột 30 câu).
-Mỗi câu có 4 lựa chọn (A, B, C, D).
-Khu vực mã đề thi (6 cột, mỗi cột 10 ô từ 0-9).
-Khu vực số báo danh (3 cột, mỗi cột 10 ô từ 0-9).
-Đáp án: 4 bộ đáp án (ANSWER_KEY_1, ANSWER_KEY_2, ANSWER_KEY_3, ANSWER_KEY_4) được định nghĩa sẵn cho 120 câu.
-Yêu cầu
-Để chạy dự án, cài đặt các gói Python sau:
+Image Processing: Detects marked bubbles on answer sheets using OpenCV.
+Answer Grading: Compares student answers against predefined answer keys (ANSWER_KEY_1 to ANSWER_KEY_4) to compute scores.
+ID Extraction: Extracts test ID and student ID from specific regions of the answer sheet.
+Result Storage: Saves scores, test IDs, and student IDs to a CSV file (exam_results.csv).
+GUI: Provides a Tkinter-based interface to open and process image files.
+Visualization: Displays the original and graded answer sheets with marked answers highlighted (correct in green, incorrect in red).
 
-bash
+Prerequisites
+Ensure you have the following installed:
 
-Sao chép
-pip install opencv-python matplotlib imutils numpy pillow
-Lưu ý: Đảm bảo Python đã được cài đặt Tkinter (thường có sẵn trong Python).
+Python 3.6 or higher
+Libraries listed in requirements.txt
 
-Cài đặt
-Tải repository hoặc các file dự án.
-Cài đặt các gói phụ thuộc được liệt kê ở phần Yêu cầu.
-Đảm bảo file A39948.py và các hình ảnh phiếu trả lời nằm trong cùng thư mục.
-Hướng dẫn sử dụng
-Chạy file A39948.py:
-bash
+Installation
 
-Sao chép
-python A39948.py
-Một cửa sổ GUI sẽ hiện ra với nút "Mở ảnh".
-Nhấn nút "Mở ảnh", chọn file hình ảnh phiếu trả lời (.jpg hoặc .png).
-Ứng dụng sẽ:
-Xử lý hình ảnh, nhận diện các ô được tô.
-Xác định mã đề thi và số báo danh.
-Tính điểm dựa trên đáp án đúng.
-Hiển thị kết quả (điểm, mã đề, số báo danh) trên GUI.
-Hiển thị hình ảnh gốc và hình ảnh phiếu trả lời với các ô được đánh dấu (đúng: xanh, sai: đỏ).
-Lưu kết quả vào file exam_results.csv.
-Kết quả đầu ra
-Trên GUI: Hiển thị điểm (thang 10), mã đề thi (6 chữ số), số báo danh (3 chữ số).
-Hình ảnh: Hiển thị phiếu trả lời với các ô được đánh dấu:
-Đáp án đúng: Viền xanh.
-Đáp án sai: Viền đỏ.
-File CSV (exam_results.csv): Lưu thông tin:
-Điểm
-Số báo danh
-Mã đề thi
-File liên quan
-A39948.py: File mã nguồn chính.
-exam_results.csv: File lưu kết quả chấm thi (tạo tự động khi chạy).
-Cải tiến trong tương lai
-Cải thiện độ chính xác khi nhận diện ô tô trong điều kiện ánh sáng kém.
-Hỗ trợ nhiều định dạng phiếu trả lời hơn.
-Thêm tính năng chỉnh sửa đáp án trực tiếp trên GUI.
-Tích hợp cơ sở dữ liệu để quản lý kết quả thi.
+Clone or download the repository.
+Install the required dependencies by running:pip install -r requirements.txt
+
+
+Ensure the script A39948.py is in the project directory.
+
+Usage
+
+Run the script:python A39948.py
+
+
+A Tkinter window will open with a "Mở ảnh" (Open Image) button.
+Click the button to select a scanned answer sheet image (.jpg or .png).
+The application will:
+Process the image to detect marked answers.
+Extract test and student IDs.
+Calculate the score based on the appropriate answer key.
+Save results to exam_results.csv.
+Display the original image and a merged view of graded sections.
+
+
+Results, including the score, test ID, and student ID, will be shown in the GUI.
+
+File Structure
+
+A39948.py: Main script containing the grading logic and GUI.
+exam_results.csv: Output file where results are saved.
+requirements.txt: Lists required Python libraries.
+README.md: This documentation file.
+
+Answer Sheet Requirements
+
+The answer sheet must be a scanned image (.jpg or .png).
+The image should be clear, with marked bubbles filled in darkly.
+The answer sheet layout must match the expected format (specific coordinates for answer sections, test ID, and student ID).
+The image will be resized to 1830x2560 pixels for processing.
+
+Dependencies
+See requirements.txt for the list of required Python libraries.
+Notes
+
+The script assumes four answer keys (ANSWER_KEY_1 to ANSWER_KEY_4) for different test versions, each with 30 questions used in the grading process.
+The application processes four sections of the answer sheet, each corresponding to a different answer key.
+The score is calculated as a percentage of correct answers out of 120 questions, scaled to a 10-point scale.
+The test and student IDs are extracted from specific regions, assuming a grid of bubbles representing digits 0-9.
+
+Troubleshooting
+
+Image not processing correctly: Ensure the image is clear and matches the expected layout. Check for proper lighting and contrast.
+Dependencies not found: Verify that all libraries in requirements.txt are installed.
+CSV file issues: Ensure write permissions for the directory where exam_results.csv is saved.
+
+License
+This project is for educational purposes and provided as-is without any warranty.
